@@ -15,7 +15,20 @@ string[] names = {
 void PrintGroups(string[] t, int perLine)
 {
 
-    // Write required code.
+        for (int i = 0; i < t.Length; i++)
+        {
+            // jeśli to nie ostatni element → przecinek i spacja
+            if (i < t.Length - 1)
+                Console.Write(t[i] + ", ");
+            else
+                Console.Write(t[i] + ".");
+
+            // nowa linia co *perLine* elementów, ale nie po ostatnim
+            if ((i + 1) % perLine == 0 && i != t.Length - 1)
+                Console.WriteLine();
+        }
+        Console.WriteLine();
+    
 
 }
 
@@ -28,7 +41,32 @@ void PrintGroups(string[] t, int perLine)
 void PrintColumns(string[] t, int perLine, int width)
 {
 
-    // Write required code.
+    {
+        for (int i = 0; i < t.Length; i++)
+        {
+            string name = t[i];
+
+            // przytnij jeśli za długie
+            if (name.Length > width)
+                name = name.Substring(0, width);
+
+            // sformatuj: wyrównaj do lewej, wypełnij spacjami
+            string formatted = name.PadRight(width);
+
+            // wypisz element
+            Console.Write(formatted);
+
+            // dodaj separator kolumn (poza ostatnią kolumną w wierszu)
+            if ((i + 1) % perLine != 0)
+                Console.Write(" | ");
+            else
+                Console.WriteLine();
+        }
+
+        // jeśli liczba elementów nie jest wielokrotnością perLine — nowa linia na koniec
+        if (t.Length % perLine != 0)
+            Console.WriteLine();
+    }
 
 }
 
