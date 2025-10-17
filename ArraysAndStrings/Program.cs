@@ -14,22 +14,22 @@ string[] names = {
 // After last element should be ".".
 void PrintGroups(string[] t, int perLine)
 {
-
-        for (int i = 0; i < t.Length; i++)
+    for (int i = 0; i < t.Length; i++)
+    {
+        if (i < t.Length - 1)
         {
-            // jeśli to nie ostatni element → przecinek i spacja
-            if (i < t.Length - 1)
-                Console.Write(t[i] + ", ");
-            else
-                Console.Write(t[i] + ".");
-
-            // nowa linia co *perLine* elementów, ale nie po ostatnim
-            if ((i + 1) % perLine == 0 && i != t.Length - 1)
-                Console.WriteLine();
+            Console.Write($"{t[i]}, ");
         }
-        Console.WriteLine();
-    
+        else
+        {
+            Console.Write($"{t[i]}.");
+        }
 
+        if ((i + 1) % perLine == 0)
+        {
+            Console.WriteLine();
+        }
+    }
 }
 
 
@@ -40,34 +40,25 @@ void PrintGroups(string[] t, int perLine)
 
 void PrintColumns(string[] t, int perLine, int width)
 {
-
+    for (int i = 0; i < t.Length; i++)
     {
-        for (int i = 0; i < t.Length; i++)
+        string name = t[i];
+        if (name.Length > width)
         {
-            string name = t[i];
+            name = name.Substring(0, width);
+        }
+        Console.Write(name.PadRight(width));
 
-            // przytnij jeśli za długie
-            if (name.Length > width)
-                name = name.Substring(0, width);
-
-            // sformatuj: wyrównaj do lewej, wypełnij spacjami
-            string formatted = name.PadRight(width);
-
-            // wypisz element
-            Console.Write(formatted);
-
-            // dodaj separator kolumn (poza ostatnią kolumną w wierszu)
-            if ((i + 1) % perLine != 0)
-                Console.Write(" | ");
-            else
-                Console.WriteLine();
+        if ((i + 1) % perLine == 0)
+        {
+            Console.WriteLine();
+        }
+        else
+        {
+            Console.Write("| ");
         }
 
-        // jeśli liczba elementów nie jest wielokrotnością perLine — nowa linia na koniec
-        if (t.Length % perLine != 0)
-            Console.WriteLine();
     }
-
 }
 
 
