@@ -1,4 +1,6 @@
-﻿public class Creature
+﻿using Simulator;
+
+public class Creature
 {
     private string _name = "Unknown";
     private bool _nameSet = false;
@@ -56,19 +58,37 @@
     public Creature() { }
     public Creature(string name, int level = 1)
     {
-        Name =  name;
+        Name = name;
         Level = level;
     }
 
     public void SayHi() { }
-    
+
 
     public string Info => $"{Name} <{Level}>";
 
     // upgrade max do 10
     public void Upgrade()
-{
-    if (_level < 10)
-        _level++;
-}
+    {
+        if (_level < 10)
+            _level++;
+    }
+    public void Go(Direction dir)
+    {
+        Console.WriteLine($"{Name} goes {dir.ToString().ToLower()}.");
+    }
+
+    // ✔️ Go(Direction[])
+    public void Go(Direction[] directions)
+    {
+        foreach (var d in directions)
+            Go(d);
+    }
+
+    // ✔️ Go(string)
+    public void Go(string s)
+    {
+        Direction[] dirs = DirectionParser.Parse(s);
+        Go(dirs);
+    }
 }
