@@ -1,6 +1,6 @@
 ﻿using Simulator;
 
-public class Creature
+public abstract class Creature
 {
     private string _name = "Unknown";
     private bool _nameSet = false;
@@ -62,10 +62,18 @@ public class Creature
         Level = level;
     }
 
-    public void SayHi() { }
+    public abstract void SayHi();
 
 
-    public string Info => $"{Name} <{Level}>";
+    public virtual string Info => $"{Name} <{Level}>";
+
+    public abstract int Power { get; }
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()} {Info}";
+
+    }
 
     // upgrade max do 10
     public void Upgrade()
@@ -84,7 +92,7 @@ public class Creature
         foreach (var d in directions)
             Go(d);
     }
-
+    
     // ✔️ Go(string)
     public void Go(string s)
     {
