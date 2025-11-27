@@ -5,17 +5,13 @@ namespace Simulator
     public class Orc : Creature
     {
         private int _huntCount = 0;
-        private int _rage = 0;
+        private int _rage;
 
         public int Rage
         {
             get => _rage;
-            private set
-            {
-                if (value < 0) value = 0;
-                if (value > 10) value = 10;
-                _rage = value;
-            }
+            private set => _rage = Validator.Limiter(value, 0, 100);
+       
         }
 
         public Orc() : base() { }
@@ -30,15 +26,8 @@ namespace Simulator
         public void Hunt()
         {
             _huntCount++;
-            Console.WriteLine($"{Name} hunts. (hunt #{_huntCount})");
             if (_huntCount % 2 == 0)
-            {
-                if (Rage < 10)
-                {
-                    Rage++;
-                    Console.WriteLine($"{Name}'s rage increased to {Rage}!");
-                }
-            }
+                Rage++;
         }
 
         public override void SayHi()

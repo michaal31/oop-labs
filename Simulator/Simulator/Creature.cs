@@ -2,101 +2,30 @@
 
 public abstract class Creature
 {
-    private string _name = "Unknown";
-    private bool _nameSet = false;
-
-    private int _level = 1;
-    private bool _levelSet = false;
+    private string _name;
+    private int _level;
 
     public string Name
     {
         get => _name;
-        set
-        {
-            // można nadać tylko raz
-            if (_nameSet) return;
-            _nameSet = true;
-
-            string s = value?.Trim() ?? "";
-
-            // min 3 znaki
-            if (s.Length < 3)
-                s = s.PadRight(3, '#');
-
-            // max 25 znaków
-            if (s.Length > 25)
-                s = s[..25].TrimEnd();
-
-            // po przycięciu znów min 3
-            if (s.Length < 3)
-                s = s.PadRight(3, '#');
-
-            // pierwsza litera wielka
-            if (char.IsLetter(s[0]) && char.IsLower(s[0]))
-                s = char.ToUpper(s[0]) + s[1..];
-
-            _name = s;
-        }
+        set => _name = Validator.Shortener(value, 1, 20, '#');
     }
 
     public int Level
     {
         get => _level;
-        set
-        {
-            // można nadać tylko raz
-            if (_levelSet) return;
-            _levelSet = true;
-
-            // zakres 1–10
-            if (value < 1) value = 1;
-            if (value > 10) value = 10;
-
-            _level = value;
-        }
+        set => _level = Validator.Limiter(value, 1, 100);
     }
-    public Creature() { }
-    public Creature(string name, int level = 1)
+
+    public abstract int Power { get; }
+    public abstract void SayHi();
+    public abstract string Info { get; }
+    protected Creature(string name = "Unknown", int level = 1)
     {
         Name = name;
         Level = level;
     }
-
-    public abstract void SayHi();
-
-
-    public virtual string Info => $"{Name} <{Level}>";
-
-    public abstract int Power { get; }
-
-    public override string ToString()
-    {
-        return $"{GetType().Name.ToUpper()} {Info}";
-
-    }
-
-    // upgrade max do 10
-    public void Upgrade()
-    {
-        if (_level < 10)
-            _level++;
-    }
-    public void Go(Direction dir)
-    {
-        Console.WriteLine($"{Name} goes {dir.ToString().ToLower()}.");
-    }
-
-    // ✔️ Go(Direction[])
-    public void Go(Direction[] directions)
-    {
-        foreach (var d in directions)
-            Go(d);
-    }
-    
-    // ✔️ Go(string)
-    public void Go(string s)
-    {
-        Direction[] dirs = DirectionParser.Parse(s);
-        Go(dirs);
-    }
 }
+
+
+  

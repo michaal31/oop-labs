@@ -9,9 +9,9 @@ internal class Program
             //Console.WriteLine("\n---------------------------\n");
             TestElfsAndOrcs();
             Console.WriteLine("\n---------------------------\n");
-            TestDirections();
+            //TestDirections();
 
-            Console.ReadLine(); 
+            //Console.ReadLine(); 
         }
 
 
@@ -77,14 +77,14 @@ internal class Program
         e,
         new Orc("Morgash", 3, 8),
         new Elf("Elandor", 5, 3)
-    };
+            };
             foreach (Creature creature in creatures)
             {
                 Console.WriteLine($"{creature.Name,-15}: {creature.Power}");
             }
         }
 
-        static void TestDirections()
+        /*static void TestDirections()
         {
             Creature c = new Elf("Shrek", 7);
             c.SayHi();
@@ -95,7 +95,7 @@ internal class Program
             Console.WriteLine("\n* Right, Left, Left, Down");
             Direction[] directions = {
             Direction.Right, Direction.Left, Direction.Left, Direction.Down
-        };
+             };
             c.Go(directions);
 
             Console.WriteLine("\n* LRL");
@@ -103,6 +103,32 @@ internal class Program
 
             Console.WriteLine("\n* xxxdR lyyLTyu");
             c.Go("xxxdR lyyLTyu");
+        }*/
+
+        static void TestValidators()
+        {
+            Creature[] creatures =
+            {
+        new Elf("Elandor", 5, 3),
+        new Orc("Morgash", 6, 4),
+        new Elf("", 15, -3),   // skracanie i ograniczanie
+        new Orc("morgash#######", 200, 99)
+            };
+
+            Console.WriteLine("VALIDATOR TEST\n");
+            foreach (var c in creatures)
+                Console.WriteLine($"{c.GetType().Name,-10}: {c.Info}");
+
+            Animals[] animals =
+            {
+        new Animals(){Description=" dogs ", Size = 3},
+        new Animals(){Description="", Size = -5},
+        new Animals(){Description="veryveryverylonganimalname", Size = 100000}
+            };
+
+            Console.WriteLine("\nANIMALS TEST\n");
+            foreach (var a in animals)
+                Console.WriteLine(a);
         }
     }
 }

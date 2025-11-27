@@ -10,12 +10,8 @@ namespace Simulator
         public int Agility
         {
             get => _agility;
-            private set
-            {
-                if (value < 0) value = 0;
-                if (value > 10) value = 10;
-                _agility = value;
-            }
+            private set => _agility = Validator.Limiter(value, 0, 10);
+            
         }
 
         
@@ -32,15 +28,8 @@ namespace Simulator
         public void Sing()
         {
             _singCount++;
-            Console.WriteLine($"{Name} sings. (sing #{_singCount})");
             if (_singCount % 3 == 0)
-            {
-                if (Agility < 10)
-                {
-                    Agility++;
-                    Console.WriteLine($"{Name}'s agility increased to {Agility}!");
-                }
-            }
+                Agility++;
         }
 
         

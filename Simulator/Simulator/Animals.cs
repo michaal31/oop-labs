@@ -1,31 +1,22 @@
 ﻿public class Animals
 {
-    private string _description = "Unknown";
-
-    public required string Description
+    private int _size;
+    private string _description;
+    
+    public string Description
     {
         get => _description;
-        init
-        {
-            string s = value?.Trim() ?? "";
-
-            if (s.Length < 3)
-                s = s.PadRight(3, '#');
-
-            if (s.Length > 15)
-                s = s[..15].TrimEnd();
-
-            if (s.Length < 3)
-                s = s.PadRight(3, '#');
-
-            if (char.IsLetter(s[0]) && char.IsLower(s[0]))
-                s = char.ToUpper(s[0]) + s[1..];
-
-            _description = s;
-        }
+        set => _description = Validator.Shortener(value, 1, 20, '#');
+    }
+    public int Size
+    {
+        get => _size;
+        set => _size = Validator.Limiter(value, 1, 10000);
     }
 
-    public uint Size { get; set; } = 3;
-
-    public string Info => $"{Description} <{Size}>";
+    public virtual string Info => $"{Description} <{Size}>";
+    public override string ToString()
+    {
+        return $"ANIMALS: {Info}";
+    }
 }
