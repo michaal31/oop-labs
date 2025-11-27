@@ -15,10 +15,7 @@ namespace Simulator
         }
 
         
-        public Elf() : base() { }
-
-        
-        public Elf(string name = "Unknown", int level = 1, int agility = 0)
+        public Elf(string name = "Elf", int level = 1, int agility = 0)
             : base(name, level)
         {
             Agility = agility;
@@ -35,13 +32,13 @@ namespace Simulator
         
         public override void SayHi()
         {
-            Console.WriteLine($"Hi, I'm {Name} the Elf (lvl {Level}) — Agility: {Agility}");
+           Console.WriteLine($"ELF: {Name} [{Level}] [{Agility}]");
         }
 
         
         public override int Power => 8 * Level + 2 * Agility;
 
         
-        public override string Info => $"{Name} <{Level}>[{Agility}]";
+        public override string Info => $"{Name} [{Level}][{Agility}]";
     }
 }

@@ -1,7 +1,7 @@
 ﻿public class Animals
 {
-    private int _size;
-    private string _description;
+    private int _size = 3;
+    private string _description = "Animals";
     
     public string Description
     {

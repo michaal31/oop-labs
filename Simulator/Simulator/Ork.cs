@@ -14,8 +14,6 @@ namespace Simulator
        
         }
 
-        public Orc() : base() { }
-
         public Orc(string name = "Unknown", int level = 1, int rage = 0)
             : base(name, level)
         {
@@ -32,12 +30,12 @@ namespace Simulator
 
         public override void SayHi()
         {
-            Console.WriteLine($"Grr! I'm {Name} the Orc (lvl {Level}) — Rage: {Rage}");
+            Console.WriteLine($"ORC {Name} [{Level}] [{Rage}]");
         }
 
         
         public override int Power => 7 * Level + 3 * Rage;
 
-        public override string Info => $"{Name} <{Level}>[{Rage}]";
+        public override string Info => $"{Name}[{Level}][{Rage}]";
     }
 }

@@ -18,13 +18,17 @@ public abstract class Creature
     }
 
     public abstract int Power { get; }
-    public abstract void SayHi();
     public abstract string Info { get; }
+    public abstract void SayHi();
+    
     protected Creature(string name = "Unknown", int level = 1)
     {
         Name = name;
         Level = level;
     }
+    public override string ToString()
+        => $"{GetType().Name.ToUpper()}: {Info}";
+    
 }
 
 
